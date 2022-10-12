@@ -11,3 +11,5 @@ class Token(db.Model):
         self.name = name
         self.quantity = quantity
         self.buying_value = buying_value
+
+
