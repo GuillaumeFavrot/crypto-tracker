@@ -2,8 +2,10 @@
 
 from flask import Blueprint, send_from_directory, request
 from exts import db
-from models.messages import Message
-from schemas.messageSchema import messages_schema
+
+from models.tokens import Token
+from schemas.tokenSchema import tokens_schema
+
 import config
 
 #Creation of the blueprint
@@ -20,65 +22,38 @@ def index():
     return send_from_directory(config.static_folder_path, 'index.html')
 
 
-
-
 # CRUD routes
- 
-# Create a message
 
-@routes.route("/api/test", methods=['POST'])
-def add_message():
+# Get wallet composition
+@routes.route("/api/wallet", methods=['GET'])
 
-    message = request.json['message']
+def get_wallet():
 
-    new_message = Message(message)
+    wallet = Token.query.all()
 
-    db.session.add(new_message)
-    db.session.commit()
+    return tokens_schema.dump(wallet)
 
-    messages = Message.query.all()
 
-    return messages_schema.dump(messages)
+# Update the wallet composition
 
-#Get all messages
+@routes.route("/api/wallet", methods=['PUT'])
 
-@routes.route("/api/test", methods=['GET'])
-def get_messages():
+def update_wallet():
 
-    messages = Message.query.all()
+    data = request.json
 
-    return messages_schema.dump(messages)
+    token = Token.query.get(data['token']) 
 
-# Update a message
+    if token :
+        token.quantity = token.quantity + data['quantity']
+        token.buying_value = token.buying_value + data['buying_value']
+        db.session.commit()
 
-@routes.route("/api/test", methods=['PUT'])
-def update_message():
+    else :
+        new_token = Token(data['token'], data['quantity'], data['buying_value'])
+        db.session.add(new_token)
+        db.session.commit()
 
-    newMessage = request.json['message']
-    id = request.json['id']
+    wallet = Token.query.all()
 
-    message = Message.query.get(id)
-
-    message.message = newMessage
-
-    db.session.commit()
-
-    messages = Message.query.all()
-
-    return messages_schema.dump(messages)
-
-# Delete a message
-
-@routes.route("/api/test", methods=['DELETE'])
-def delete_message():
-
-    id = request.json['id']
-
-    message = Message.query.get(id)
-
-    db.session.delete(message)
-    db.session.commit()
-
-    messages = Message.query.all()
-
-    return messages_schema.dump(messages)
+    return tokens_schema.dump(wallet)

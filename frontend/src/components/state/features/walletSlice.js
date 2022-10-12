@@ -43,7 +43,6 @@ export const getWallet = createAsyncThunk(
       return JSON.stringify(response)
     }
     catch (e) {
-      console.log(e)
       throw(e)
     }
   }
@@ -72,23 +71,17 @@ const initialState = {
   wallet: [
     {
         abbreviation : 'BTC',
-        name : 'Bitcoin',
-        image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Bitcoin.svg/1200px-Bitcoin.svg.png',
-        qty: 0,
+        quantity: 0,
         buying_value: 0
     },
     {
         abbreviation : 'ETC',
-        name : 'Ethereum',
-        image: 'https://www.svgrepo.com/show/353715/ethereum.svg',
-        qty: 0,
+        quantity: 0,
         buying_value: 0
     },
     {
         abbreviation : 'XRP',
-        name : 'Ripple',
-        image: 'https://cryptologos.cc/logos/xrp-xrp-logo.png',
-        qty: 0,
+        quantity: 0,
         buying_value: 0
     }
   ],

@@ -15,7 +15,7 @@ function WalletOverview() {
             </div>
             <div className='container-fluid container-centered mt-5'>
                 {wallet.wallet.map((token)=>(
-                    <Token key={token.name} token={token}/>
+                    <Token key={token.abbreviation} token={token}/>
                 ))}       
             </div>
         </div>
