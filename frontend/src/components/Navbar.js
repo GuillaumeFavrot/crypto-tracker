@@ -16,7 +16,7 @@ import {modifyPage} from './state/features/viewSlice'
     const dispatch = useDispatch()
 
     return (
-      <div className='mainNavBar'>
+      <div>
         <nav className="fixed-top navbar navbar-dark navbar-expand-lg bg-black border-bottom border-dark h-85">
           <div className={view.page === "home" ? "container-fluid text-light": "container-fluid text-light d-none"}>
             <h1 className="mb-0 bold">

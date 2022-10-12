@@ -6,7 +6,7 @@ import { useEffect } from 'react'
 import { getTestMessage } from './state/features/testSlice'
 import { useDispatch } from 'react-redux'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import Body from './Body.js'
+import Body from './body/Body.js'
 import Navbar from './Navbar.js'
 
 function App() {
@@ -18,9 +18,13 @@ function App() {
   }, [])
 
   return (
-    <div className="application">
-      <Navbar />
-      <Body />
+    <div className="application container-fluid d-flex flex-column">
+      <div>
+        <Navbar />
+      </div>
+      <div>
+        <Body />
+      </div>
     </div>
   )
 }

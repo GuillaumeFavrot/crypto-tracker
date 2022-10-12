@@ -10,9 +10,31 @@ To override this default behavior add '!important' at the end of a rule to give 
   width: 100% !important;
   height: 100vh !important;
   font-family: 'Roboto', sans-serif !important;
+  background-color: black !important;
 }
 
 .bold {
   font-weight: 700 !important;
+}
+
+.big-font {
+  font-size: 3rem !important;
+}
+
+.img-small {
+  height: 45px !important;
+}
+
+.container-centered {
+  max-width: 50rem;
+}
+
+.container-form {
+  max-width: 35rem;
+  height: 90vh;
+}
+
+.form-control {
+  border-radius: 3px !important;
 }
 

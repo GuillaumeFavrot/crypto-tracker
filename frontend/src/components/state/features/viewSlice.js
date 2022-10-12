@@ -9,7 +9,6 @@ const viewSlice = createSlice({
   ,
   reducers: {
     modifyPage(state, action) {
-        console.log(action)
       state.page = action.payload
     }
   }

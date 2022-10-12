@@ -7,10 +7,12 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { testReducer } from './features/testSlice'
 import viewReducer from './features/viewSlice'
+import { walletReducer } from './features/walletSlice'
 
 export default configureStore({
   reducer: {
     test: testReducer,
-    view: viewReducer
+    view: viewReducer,
+    wallet: walletReducer
   }
 })
