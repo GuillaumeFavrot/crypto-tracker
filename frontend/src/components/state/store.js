@@ -6,9 +6,11 @@
 
 import { configureStore } from '@reduxjs/toolkit'
 import { testReducer } from './features/testSlice'
+import viewReducer from './features/viewSlice'
 
 export default configureStore({
   reducer: {
-    test: testReducer
+    test: testReducer,
+    view: viewReducer
   }
 })

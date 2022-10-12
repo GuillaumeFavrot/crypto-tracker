@@ -3,8 +3,16 @@ This app uses Bootstrap for quick CSS formatting however if specific custom CSS 
 If a rule written in this file does not properly apply to the app it's because bootstrap rules usually take priority.
 To override this default behavior add '!important' at the end of a rule to give it priority
 */
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
  
 .application {
   width: 100% !important;
   height: 100vh !important;
+  font-family: 'Roboto', sans-serif !important;
 }
+
+.bold {
+  font-weight: 700 !important;
+}
+
