@@ -75,7 +75,7 @@ const initialState = {
         buying_value: 0
     },
     {
-        abbreviation : 'ETC',
+        abbreviation : 'ETH',
         quantity: 0,
         buying_value: 0
     },
@@ -85,6 +85,12 @@ const initialState = {
         buying_value: 0
     }
   ],
+  total: {
+    abbreviation: 'TOT',
+    buying_value : 0,
+    current_value: 0,
+    profit: 0,
+  },
   loading: false,
   statusText: '',
 }
@@ -103,7 +109,9 @@ export const walletSlice = createSlice({
       let res = JSON.parse(payload)
       state.loading = false
       state.statusText = `GET Request ${res.statusText} with status code ${res.status}`
-      state.wallet = res.data
+      state.wallet = res.data.wallet
+      state.total = res.data.total
+
     },
     [getWallet.rejected]: (state, { error } ) => {
       state.loading = false
@@ -118,7 +126,8 @@ export const walletSlice = createSlice({
       let res = JSON.parse(payload)
       state.loading = false
       state.statusText = `PUT Request ${res.statusText} with status code ${res.status}`
-      state.wallet = res.data
+      state.wallet = res.data.wallet
+      state.total = res.data.total
     },
     [modifyWallet.rejected]: (state, { error }) => {
       state.loading = false

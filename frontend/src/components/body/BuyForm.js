@@ -1,4 +1,4 @@
-import React, { useState }  from 'react'
+import React, { useState, useEffect }  from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { modifyWallet } from './../state/features/walletSlice'
 
@@ -11,41 +11,59 @@ function BuyForm() {
     const [token, setToken] = useState('')
     const [quantity, setQuantity] = useState(0)
     const [amount, setAmount] = useState(0)
+    const [error, setError] = useState('')
+    const [success, setSuccess] = useState('')
 
     //Dispatcher setup
     const dispatch = useDispatch()
 
     //Setter functions
-
     const onTokenChange = (e) => {
         setToken(e.target.value)
+        setSuccess('')
     }
 
     const onQuantityChange = (e) => {
         setQuantity(parseFloat(e.target.value))
+        setSuccess('')
     }
 
     const onAmountChange = (e) => {
         setAmount(parseFloat(e.target.value))
+        setSuccess('')
     }
 
     //Submit function
     const onSubmit = (e) => {
         e.preventDefault()
-        
-        if (token !== 'Sélectionnez une crypto' && token !== '' && quantity !== 0 && amount !== 0) {
-        const transaction = {
-            token: token,
-            quantity: quantity,
-            buying_value: amount
-        }
-        dispatch(modifyWallet(transaction))
-        setToken('')
-        setQuantity(0)
-        setAmount(0)            
-        }
-        else {
-            throw console.error('bad request');
+        setError('')
+
+        if (token !== 'Sélectionnez une crypto' && token !== '') {
+            if(quantity !== 0 ) {
+                if(amount >= 0) {
+                    const transaction = {
+                        token: token,
+                        quantity: quantity,
+                        buying_value: amount
+                    }
+                    try {
+                        dispatch(modifyWallet(transaction))
+                        setSuccess('Transaction enregistrée avec succès!')
+                    } catch (e) {
+                        console.error(e)
+                        setError("Erreur lors de l'enregistrement de la transaction")
+                    }
+                    setToken('')
+                    setQuantity(0)
+                    setAmount(0)
+                } else {
+                    setError('Veuillez saisir un montant supérieur ou égal à 0')
+                }
+            } else {
+                setError('Veuillez saisir une quantité supérieure à 0')
+            }
+        } else {
+            setError('Veuillez sélectionner une crypto')
         }
     }
 
@@ -57,7 +75,7 @@ function BuyForm() {
                         <select onChange={(e) => onTokenChange(e)} value={token} className="bg-black border-secondary form-control ps-5 pt-3 pb-3 text-white" placeholder="Sélectionner une crypto" id="token" aria-describedby="token">
                             <option >Sélectionnez une crypto</option>
                             <option name="BTC" value="BTC">BTC (Bitcoin)</option>
-                            <option name="ETC" value="ETC">ETC (Ethereum)</option>
+                            <option name="ETH" value="ETH">ETC (Ethereum)</option>
                             <option name="XRP" value="XRP">XRP (Ripple)</option>
                         </select>
                         <i className="position-fixed ms-3">
@@ -84,9 +102,16 @@ function BuyForm() {
                             </svg>
                         </i>
                     </div>
+
                 </div>
-                <div className="ps-5 pe-5 mb-4">
-                    <button type="submit" className="btn btn-secondary w-100 fs-1 text-black pt-2 pb-2">Ajouter</button>
+                <div className="ps-5 pe-5 mb-4">                    
+                    <div className={error !== '' ? "d-block text-danger bold text-center" : 'd-none'}>
+                        {error}
+                    </div>
+                    <div className={success !== '' ? "d-block text-success bold text-center" : 'd-none'}>
+                        {success}
+                    </div>
+                    <button type="submit" className="btn btn-secondary w-100 fs-1 text-black pt-2 pb-2 mt-3">Ajouter</button>
                 </div>
                 
             </form>

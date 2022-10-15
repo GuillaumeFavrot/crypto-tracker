@@ -5,13 +5,11 @@
 // For more information on Redux setup refer to the official documentation : https://redux.js.org/ 
 
 import { configureStore } from '@reduxjs/toolkit'
-import { testReducer } from './features/testSlice'
 import viewReducer from './features/viewSlice'
 import { walletReducer } from './features/walletSlice'
 
 export default configureStore({
   reducer: {
-    test: testReducer,
     view: viewReducer,
     wallet: walletReducer
   }

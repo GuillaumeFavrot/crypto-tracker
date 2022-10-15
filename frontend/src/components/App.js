@@ -3,7 +3,6 @@
 
 import React from 'react'
 import { useEffect } from 'react'
-import { getTestMessage } from './state/features/testSlice'
 import { getWallet } from './state/features/walletSlice'
 import { useDispatch } from 'react-redux'
 import 'bootstrap/dist/css/bootstrap.min.css'
