@@ -1,12 +1,6 @@
-# FLASK-REACT (Docker edition)
+# CRYPTO TRACKER
 
-This template has been created as a tool to speed up the process of creation and hosting of a fullstack app.
-
-DISCLAIMER : THIS TEMPLATE HAS BEEN CREATED FOR PERSONNAL USE AS A SIDE PROJECT IT DOES NOT NECESSERILY FEATURES THE BEST DEVLOPMENT PRACTICES. ITS ONLY GOAL IS TO PROVIDE SOME BOILERPLATE CODE FOR A FAST DEPLOYMENT OF A SIMPLE FULLSTACK APP.
-
-
-
-# TEMPLATE SETUP PROCEDURE
+# SETUP PROCEDURE
 
 This setup procedure is suitable for a freshly cloned folder (from git) on a fresh machine.
 
@@ -24,7 +18,7 @@ All other required packages and dependencies will be installed during the setup 
 
 # A - Environement setup
 
-Upon downloading of this template the first step is to ensure the correct environment is set up.
+Upon downloading of this app the first step is to ensure the correct environment is set up.
 
 
 A.1 - Flask environement setup
@@ -48,7 +42,7 @@ All javascript dependencies are listed in the package.json file in the frontend 
 
 =>To install all javascript dependencies, navigate to the frontend directory and run the command :
     
-$ npn install
+$ npm install
 
 This command will install all dependencies listed in the package.json file
 

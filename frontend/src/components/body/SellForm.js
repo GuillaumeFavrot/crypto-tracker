@@ -1,4 +1,4 @@
-import React, { useState }  from 'react'
+import React, { useEffect, useState }  from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { modifyWallet } from './../state/features/walletSlice'
 
@@ -11,6 +11,7 @@ function SellForm() {
     //Local state
     const [token, setToken] = useState('')
     const [quantity, setQuantity] = useState(0)
+    const [maxQuantity, setMaxQuantity] = useState(0)
     const [error, setError] = useState('')
     const [success, setSuccess] = useState('')
 
@@ -28,6 +29,16 @@ function SellForm() {
         setQuantity(parseFloat(e.target.value))
         setSuccess('')
     }
+
+    //Get max function
+
+    useEffect(() => {
+            for (let i = 0; i < wallet.wallet.length; i++) {
+                if(wallet.wallet[i].abbreviation === token) {
+                    setMaxQuantity(wallet.wallet[i].quantity)
+                }
+            }
+        }, [token])
 
     //Submit function
     const onSubmit = (e) => {
@@ -51,12 +62,14 @@ function SellForm() {
                     }
                     try {
                         dispatch(modifyWallet(transaction))
+                        setSuccess('Transaction enregistrée avec succès!')
                     } catch (e) {
                         console.error(e)
                         setError("Erreur lors de l'enregistrement de la transaction")
                     }
                     setToken('')
                     setQuantity(0)
+                    setMaxQuantity(0)
                 } else {
                     setError('Quantité de crypto disponible insuffisante pour réaliser cette transaction')
                 }
@@ -67,6 +80,7 @@ function SellForm() {
             setError('Veuillez sélectionner une crypto');
         }
     }
+
 
     return (
         <div className={view.page === "Supprimer un montant" ? "pt-5 container-fluid container-form" : "d-none"}>
@@ -95,6 +109,9 @@ function SellForm() {
                             </svg>
                         </i>
                     </div>
+                    <p className="position-relative mt-3 text-white max">
+                            (Max: {maxQuantity})
+                    </p>
                 </div>
                 <div className="ps-5 pe-5 mb-4">                
                     <div className={error !== '' ? "d-block text-danger bold text-center" : 'd-none'}>
