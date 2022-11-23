@@ -33,6 +33,16 @@ function BuyForm() {
         setSuccess('')
     }
 
+    //Status message resetter
+
+    useEffect(() => {
+        setSuccess('')
+        setError('')
+        setAmount(0)
+        setQuantity(0)
+        setToken('')
+    }, [view])
+
     //Submit function
     const onSubmit = (e) => {
         e.preventDefault()

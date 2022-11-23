@@ -2,6 +2,7 @@ import React from 'react'
 import BuyForm from './BuyForm'
 import SellForm from './SellForm'
 import WalletOverview from './WalletOverview'
+import Graph from './Graph'
 
 function Body () {
   return (
@@ -9,6 +10,7 @@ function Body () {
         <WalletOverview />
         <BuyForm />
         <SellForm />
+        <Graph/>
     </div>
   )
 }

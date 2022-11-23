@@ -40,6 +40,15 @@ function SellForm() {
             }
         }, [token])
 
+    //Status message resetter
+
+    useEffect(() => {
+        setSuccess('')
+        setError('')
+        setQuantity(0)
+        setToken('')
+    }, [view])
+    
     //Submit function
     const onSubmit = (e) => {
         e.preventDefault()

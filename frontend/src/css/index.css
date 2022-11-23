@@ -43,5 +43,10 @@ To override this default behavior add '!important' at the end of a rule to give 
   width: 100%;
   text-align: end;
   padding-right: 2.5rem;
+  pointer-events: none;
+}
+
+.link {
+  text-decoration: none;
 }
 
