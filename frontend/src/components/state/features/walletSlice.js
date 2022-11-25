@@ -61,6 +61,36 @@ export const modifyWallet = createAsyncThunk(
   }
 )
 
+//Backup history route
+
+export const backupHistory = createAsyncThunk(
+  'history/backupHistory',
+  async () => {
+    try {
+      const response = await api.get(`/api/history/backup`)
+      return JSON.stringify(response)
+    }
+    catch (e) {
+      throw(e)
+    }
+  }
+)
+
+//Graph update route
+
+export const getGraph = createAsyncThunk(
+  'graph/getGraph',
+  async () => {
+    try {
+      const response = await api.get(`/api/history/get`)
+      return JSON.stringify(response)
+    }
+    catch (e) {
+      throw(e)
+    }
+  }
+)
+
 // Initial state and reducers
 // Each CRUD action have is own set of functions in order to modify the state whether the action is pending, fulfilled or rejected.
 // All request errors are handled. 

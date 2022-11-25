@@ -11,6 +11,7 @@ from schemas.historySchema import histories_schema
 from utilities.analysis import get_analysis
 from utilities.history import get_history
 from utilities.price import token_price
+from utilities.graph import update_graph
 
 import config
 
@@ -114,7 +115,7 @@ def backup_wallet_data():
 @routes.route("/api/history/get", methods=['GET'])
 def get_wallet_history():
     data = History.query.all()
-    
+    update_graph(histories_schema.dump(data))
     return histories_schema.dump(data)
 
 ####### Graph generation route
