@@ -61,21 +61,6 @@ export const modifyWallet = createAsyncThunk(
   }
 )
 
-//Backup history route
-
-export const backupHistory = createAsyncThunk(
-  'history/backupHistory',
-  async () => {
-    try {
-      const response = await api.get(`/api/history/backup`)
-      return JSON.stringify(response)
-    }
-    catch (e) {
-      throw(e)
-    }
-  }
-)
-
 //Graph update route
 
 export const getGraph = createAsyncThunk(

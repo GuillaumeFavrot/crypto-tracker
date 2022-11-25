@@ -4,8 +4,6 @@ import numpy as np
 
 def update_graph(history):
 
-    print(history)
-
     x = np.arange(0,len(history))
 
     y = np.zeros(len(history))
