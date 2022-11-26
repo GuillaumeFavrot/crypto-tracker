@@ -112,17 +112,12 @@ def backup_wallet_data():
 
 # Get wallet history
 
-@routes.route("/api/history/get", methods=['GET'])
+@routes.route("/api/history/get", methods=['POST'])
 def get_wallet_history():
+
+    req = request.json
+
     data = History.query.all()
-    update_graph(histories_schema.dump(data))
-    return histories_schema.dump(data)
+    update_graph(histories_schema.dump(data), req)
 
-####### Graph generation route
-
-# Generate an up to date graph
-
-@routes.route("/api/graph", methods=['GET'])
-def generate_graph():
-    response = 'graph generated'
-    return response
+    return 'ok'

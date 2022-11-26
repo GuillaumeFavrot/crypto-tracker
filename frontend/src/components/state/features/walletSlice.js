@@ -67,7 +67,7 @@ export const getGraph = createAsyncThunk(
   'graph/getGraph',
   async (data) => {
     try {
-      const response = await api.get(`/api/history/get`, data)
+      const response = await api.post(`/api/history/get`, data)
       return JSON.stringify(response)
     }
     catch (e) {

@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import { flushSync } from 'react-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { getGraph } from './../state/features/walletSlice'
 import plot from './plot.png'
@@ -32,7 +33,7 @@ function Graph() {
 
   //Graph update request function
   const updateGraph = () => {
-    console.log(token, report, period)
+  
     let request = {
       token: token,
       report: report,
