@@ -65,9 +65,9 @@ export const modifyWallet = createAsyncThunk(
 
 export const getGraph = createAsyncThunk(
   'graph/getGraph',
-  async () => {
+  async (data) => {
     try {
-      const response = await api.get(`/api/history/get`)
+      const response = await api.get(`/api/history/get`, data)
       return JSON.stringify(response)
     }
     catch (e) {

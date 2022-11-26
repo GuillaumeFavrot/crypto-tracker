@@ -10,7 +10,7 @@ def trigger_backup():
     requests.get(url = url)
 
 scheduler = BlockingScheduler(timezone=utc)
-scheduler.add_job(trigger_backup, 'interval', minutes=2)
+scheduler.add_job(trigger_backup, 'interval', minutes=10)
     
 try:
     scheduler.start()
