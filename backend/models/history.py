@@ -5,7 +5,7 @@ from sqlalchemy import DateTime
 from exts import db
 
 class History(db.Model):
-    date = db.Column(DateTime, default=datetime.datetime.utcnow, primary_key=True, unique=True)
+    date = db.Column(DateTime, default=datetime.datetime.now(), primary_key=True, unique=True)
 
     btc_quantity = db.Column(db.Float, unique=False)
     btc_price = db.Column(db.Float, unique=False)

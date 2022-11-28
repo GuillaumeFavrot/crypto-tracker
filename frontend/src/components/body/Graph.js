@@ -47,12 +47,11 @@ function Graph() {
 
   return (
     <div className={view.page === "Evolution du portefeuille" ? "pt-5 container-fluid container-form text-white d-flex flex-column" : "d-none"}>
-      <img src={plot} alt=""></img>
-      <h5 className='mt-3 mb-3 text-center'>Sélectionnez votre rapport</h5>
+      <img src={plot} alt="" className='plot'></img>
 
-      <div className='d-flex flex-row mb-1'>
+      <div className='d-flex flex-row mb-1 mt-3'>
 
-        <select onChange={(e) => onTokenChange(e)} value={token} className="form-select me-1" aria-label="Default select example">
+        <select onChange={(e) => onTokenChange(e)} value={token} className="form-select me-1 bg-black border-secondary pt-1 pb-1 text-white" aria-label="Default select example">
           <option selected disabled>Crypto</option>
           <option value="btc">Bitcoin (BTC)</option>
           <option value="eth">Ethereum (ETH)</option>
@@ -60,7 +59,7 @@ function Graph() {
           <option value="total">Portefeuille total</option>
         </select>
 
-        <select onChange={(e) => onReportChange(e)} value={report} className="form-select me-1" aria-label="Default select example">
+        <select onChange={(e) => onReportChange(e)} value={report} className="form-select me-1 bg-black border-secondary pt-1 pb-1 text-white" aria-label="Default select example">
           <option selected disabled>Rapport</option>
           <option value="profit">Profit (en euros)</option>
           <option value="profitper">Profit (en %)</option>
@@ -68,7 +67,7 @@ function Graph() {
           <option value="price">Prix unitaire (crypto uniquement)</option>
         </select>
 
-        <select onChange={(e) => onPeriodChange(e)} value={period} className="form-select" aria-label="Default select example">
+        <select onChange={(e) => onPeriodChange(e)} value={period} className="form-select me-1 bg-black border-secondary text-white" aria-label="Default select example">
           <option selected disabled>Période</option>
           <option value="day">Une journée</option>
           <option value="week">Une semaine</option>
@@ -76,7 +75,7 @@ function Graph() {
           <option value="all">Depuis le début</option>
         </select>
       </div>
-      <button onClick={() => updateGraph()} className='btn btn-success'>Mettre à jour le graphique</button>
+      <button onClick={() => updateGraph()} className="btn btn-secondary w-100 fs-4 text-black pt-1 pb-1 mt-1">Mettre à jour le graphique</button>
     </div>
   )
 }
