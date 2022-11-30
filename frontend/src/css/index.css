@@ -48,6 +48,7 @@ To override this default behavior add '!important' at the end of a rule to give 
 
 .link {
   text-decoration: none;
+  font-weight: bold !important;
 }
 
 .btn-nohover:hover {

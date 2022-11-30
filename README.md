@@ -59,7 +59,7 @@ B.1 - Flask
 
 To launch the Flask web server be sure to have the virtual environment up and running then naviguate in the backend directory and use the command :
 
-$ python3 server.py
+$ python3 app.py
 
 This command will launch the python server that will be avaiblable at the following address (local) : 127.0.0.1:5000
 

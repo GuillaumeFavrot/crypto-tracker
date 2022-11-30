@@ -82,32 +82,38 @@ def backup_wallet_data():
     
     history = get_history(tokens_schema.dump(wallet))
 
-    btc_quantity = history['btc_quantity']
-    btc_price = history['btc_price']
-    btc_current_value = history['btc_current_value']
-    btc_buying_value = history['btc_buying_value']
-    btc_profit = history['btc_profit']
-    btc_profitper = history['btc_profitper']
-    eth_quantity = history['eth_quantity']
-    eth_price = history['eth_price']
-    eth_current_value = history['eth_current_value']
-    eth_buying_value = history['eth_buying_value']
-    eth_profit = history['eth_profit']
-    eth_profitper = history['eth_profitper']
-    xrp_quantity = history['xrp_quantity']
-    xrp_price = history['xrp_price']
-    xrp_current_value = history['xrp_current_value']
-    xrp_buying_value = history['xrp_buying_value']
-    xrp_profit = history['xrp_profit']
-    xrp_profitper = history['xrp_profitper']
-    total_buying_value = history['total_buying_value']
-    total_current_value = history['total_current_value']
-    total_profit = history['total_profit']
-    total_profitper = history['total_profitper']
-
     date = datetime.now()
 
-    save = History(date, btc_quantity, btc_price,btc_current_value, btc_buying_value, btc_profit, btc_profitper, eth_quantity, eth_price, eth_current_value, eth_buying_value, eth_profit, eth_profitper, xrp_quantity, xrp_price, xrp_current_value, xrp_buying_value, xrp_profit, xrp_profitper, total_buying_value, total_current_value, total_profit, total_profitper)
+    save = History(
+        date,
+        
+        history['btc_price'],
+        history['eth_price'], 
+        history['xrp_price'], 
+
+        history['btc_quantity'], 
+        history['btc_current_value'], 
+        history['btc_buying_value'],
+        history['btc_profit'],
+        history['btc_profitper'],
+
+        history['eth_quantity'],
+        history['eth_current_value'],
+        history['eth_buying_value'],
+        history['eth_profit'],
+        history['eth_profitper'],
+
+        history['xrp_quantity'],
+        history['xrp_current_value'],
+        history['xrp_buying_value'],
+        history['xrp_profit'],
+        history['xrp_profitper'],
+        
+        history['total_buying_value'],
+        history['total_current_value'],
+        history['total_profit'],
+        history['total_profitper']
+    )
     db.session.add(save)
     db.session.commit()
 
@@ -131,7 +137,5 @@ def get_wallet_history():
 
 @routes.route(f"/api/history/plot/<id>", methods=['GET'])
 def get_plot(id):
-    print(id)
-
     image = f'./plot.{id}.png'
     return send_file(image)
