@@ -108,6 +108,7 @@ const initialState = {
   },
   loading: false,
   statusText: '',
+  graphId : ''
 }
 
 export const walletSlice = createSlice({
@@ -116,7 +117,7 @@ export const walletSlice = createSlice({
   reducers: {},
   extraReducers: {
 
-    //GET reducers  
+    //GET Wallet reducers  
     [getWallet.pending]: (state) => {
       state.loading = true
     },
@@ -147,6 +148,21 @@ export const walletSlice = createSlice({
     [modifyWallet.rejected]: (state, { error }) => {
       state.loading = false
       state.statusText = `PUT ${error.message}`
+    },
+
+    //GET Graph reducers  
+    [getGraph.pending]: (state) => {
+      state.loading = true
+    },
+    [getGraph.fulfilled]: (state, { payload } ) => {
+      let res = JSON.parse(payload)
+      state.loading = false
+      state.statusText = `GET Request ${res.statusText} with status code ${res.status}`
+      state.graphId = res.data
+    },
+    [getGraph.rejected]: (state, { error } ) => {
+      state.loading = false
+      state.statusText = error.message === 'Network Error' ? 'GET request failed with status code 404' : `GET ${error.message}`
     },
   },
 })

@@ -50,3 +50,7 @@ To override this default behavior add '!important' at the end of a rule to give 
   text-decoration: none;
 }
 
+.btn-nohover:hover {
+  color: rgb(0, 0, 0) !important;
+  text-decoration: none;
+}

@@ -1,7 +1,10 @@
 #!/bin/python
 
-from flask import Blueprint, send_from_directory, request
+from flask import Blueprint, send_from_directory, request, send_file
+from datetime import datetime
+
 from exts import db
+
 
 from models.tokens import Token
 from models.history import History
@@ -18,7 +21,7 @@ import config
 #Creation of the blueprint
 
 routes = Blueprint('route', __name__)
-
+graph_id = ''
 
 # Main routes setup
 
@@ -102,7 +105,9 @@ def backup_wallet_data():
     total_profit = history['total_profit']
     total_profitper = history['total_profitper']
 
-    save = History(btc_quantity, btc_price,btc_current_value, btc_buying_value, btc_profit, btc_profitper, eth_quantity, eth_price, eth_current_value, eth_buying_value, eth_profit, eth_profitper, xrp_quantity, xrp_price, xrp_current_value, xrp_buying_value, xrp_profit, xrp_profitper, total_buying_value, total_current_value, total_profit, total_profitper)
+    date = datetime.now()
+
+    save = History(date, btc_quantity, btc_price,btc_current_value, btc_buying_value, btc_profit, btc_profitper, eth_quantity, eth_price, eth_current_value, eth_buying_value, eth_profit, eth_profitper, xrp_quantity, xrp_price, xrp_current_value, xrp_buying_value, xrp_profit, xrp_profitper, total_buying_value, total_current_value, total_profit, total_profitper)
     db.session.add(save)
     db.session.commit()
 
@@ -118,6 +123,15 @@ def get_wallet_history():
     req = request.json
 
     data = History.query.all()
-    update_graph(histories_schema.dump(data), req)
+    graph_id = str(update_graph(histories_schema.dump(data), req))
 
-    return 'ok'
+    return str(graph_id)
+
+# Get plot
+
+@routes.route(f"/api/history/plot/<id>", methods=['GET'])
+def get_plot(id):
+    print(id)
+
+    image = f'./plot.{id}.png'
+    return send_file(image)
