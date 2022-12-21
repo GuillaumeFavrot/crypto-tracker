@@ -43,7 +43,7 @@ function Graph() {
 
   return (
     <div className={view.page === "Evolution du portefeuille" ? "pt-5 container-fluid container-form text-white d-flex flex-column" : "d-none"}>
-      <img src={`http://127.0.0.1:8000/api/history/plot/${graphId}`} alt=""></img>
+      <img src={`http://194.233.167.60/api/history/plot/${graphId}`} alt=""></img>
 
       <div className='d-flex flex-row mb-1 mt-3'>
 
