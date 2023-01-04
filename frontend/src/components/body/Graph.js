@@ -14,6 +14,15 @@ function Graph() {
   const [report, setReport] = useState('profit')
   const [period, setPeriod] = useState('all')
 
+  //This is the IP address this component will fetch the plot on
+  let ip
+
+  if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
+    ip = '127.0.0.1:8000'
+  } else {
+    ip = process.env.REACT_APP_PROD_IP
+  }
+
 
   //User input detection functions 
   const onTokenChange = (e) => {
@@ -43,7 +52,7 @@ function Graph() {
 
   return (
     <div className={view.page === "Evolution du portefeuille" ? "pt-5 container-fluid container-form text-white d-flex flex-column" : "d-none"}>
-      <img src={`http://194.233.167.60/api/history/plot/${graphId}`} alt=""></img>
+      <img src={`http://${ip}/api/history/plot/${graphId}`} alt=""></img>
 
       <div className='d-flex flex-row mb-1 mt-3'>
 

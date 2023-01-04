@@ -4,6 +4,9 @@ import os
 
 import numpy as np
 
+##This line as be added in avoid thread issues
+plot.switch_backend('agg')
+
 def update_graph(history, req):
                                                                                                                                                                                                                           
     #The database data is converted into a numpy array in order to be easily manipulated
@@ -137,6 +140,8 @@ def update_graph(history, req):
     plot.tight_layout()
     plot.subplots_adjust(top=0.88)
     
+    print(os.listdir())
+
     #I remove old plots 
     for old_plot in [plot for plot in os.listdir() if plot.startswith('plot')] :
         os.remove(old_plot)

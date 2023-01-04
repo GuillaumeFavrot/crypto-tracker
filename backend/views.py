@@ -129,7 +129,9 @@ def get_wallet_history():
     req = request.json
 
     data = History.query.all()
+
     graph_id = str(update_graph(histories_schema.dump(data), req))
+    print(graph_id)
 
     return str(graph_id)
 
