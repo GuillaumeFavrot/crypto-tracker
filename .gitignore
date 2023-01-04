@@ -24,7 +24,7 @@ yarn-debug.log*
 yarn-error.log*
 
 # Secret file
-/.env
+frontend/.env
 
 #db
-frontend/db.sqlite
+backend/db.sqlite

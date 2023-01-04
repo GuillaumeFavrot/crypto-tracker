@@ -16,7 +16,7 @@ All other required packages and dependencies will be installed during the setup 
 
 
 
-# A - Environement setup
+# A - DEV Environement setup
 
 Upon downloading of this app the first step is to ensure the correct environment is set up.
 
@@ -59,11 +59,11 @@ B.1 - Flask
 
 To launch the Flask web server be sure to have the virtual environment up and running then naviguate in the backend directory and use the command :
 
-$ python3 server.py
+$ python3 app.py
 
 This command will launch the python server that will be avaiblable at the following address (local) : 127.0.0.1:5000
 
-In this template Flask is configured to serve the React app on the root address however this features requires to generate a live build. Without a live build the root adress (127.0.0.1:8000) leads to nothing. If you want to generate a live build manually, refer to the "manual live build" section of this document.
+In this template Flask is configured to serve the React app on the root address however this features requires to generate a live build. Without a live build the root adress (127.0.0.1:8000) leads to nothing.
 
 => (Option 2) Gunicorn production server  
 
@@ -84,59 +84,43 @@ The React development environement has it's own webserver accessible at the addr
 
 localhost:3000
 
-In this template Flask is configured to serve the React app on its root address however this require a live build. While on a development build use the localhost address.
-
-
-# C - Creation of the .env file
-
-WIP 
-
-
-# UPDATING DEPENDENCIES
-
-# A. Python dependencies
-
-If you wish to install new Python dependencies this requirement.txt file will NOT update itself automatically to update it use the following command :
-
-$ pip freeze > requirement.txt
-
-
-# B. Node dependencies
-
-The package.json update itself automatically when new dependencies are installed.
-
-
-# DESCRIPTION OF THE MAIN COMPONENTS OF THE APP
-
-WIP
-
-# DOCKER IMAGE BUILDING PROCEDURE
+# Running the app as a container
 
 # A. Creating a react live build
 
-Generating a manual live build is quite straight forward :
 => The first step requires to naviguate with the console in the frontend directory and run the command :
 
+$ npm install
 $ npm run build
 
 This command will bundle all the react code into static files and store them into a "build" folder in the root  directory.
 
 The Flask app is setup to serve the index.html file and all other static file from the build folder on its root address.
 
+# B. Creating a .env file
 
-# B. Updating the dockerfile
+If this app is meant to be run on a server instead of a local machine it needs a .env file with the server ip adress to run properly.
 
-In order to move to a developpement build it's necessary to transfer the ENV variables to the container.
+Naviguate in the frontend folder of the app, create a file named .env and insert :
+    REACT_APP_PROD_IP=YOUR_IP_ADDRESS
 
-WIP
+This will allow the frontend to know where to look for the graph.
+
+# C. Creating the DB
+
+/ ! \ You need all python packages installed to initialize the db. A working virtual env is advised. Please follow the "Dev env setup" of this readme / ! \
+
+Naviguate in the backend folder and run the following command :
+
+$ python3 db_init.py
 
 
-# C. Building and running the image
+# D. Building and running the image
 
-The app is composed of two containers. The main app container and the nginx container. To launch both containers concurrently use the following command :
+The app is composed of three containers. The main app container and the nginx container and a scheduler that calls regularly an API endpoint to trigger a DB backup. To launch all containers concurrently use the following command :
 
-$ docker-compose up -d
+$ docker-compose up -d -- build
 
 To bring the app down use this command :
 
-$ docker-compose down 
+$ docker-compose down

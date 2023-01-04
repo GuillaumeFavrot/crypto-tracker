@@ -1,11 +1,10 @@
 #!/bin/python
-import datetime
 from sqlalchemy import DateTime
 
 from exts import db
 
 class History(db.Model):
-    date = db.Column(DateTime, default=datetime.datetime.now(), primary_key=True, unique=True)
+    date = db.Column(DateTime, primary_key=True, unique=True)
 
     btc_quantity = db.Column(db.Float, unique=False)
     btc_price = db.Column(db.Float, unique=False)
@@ -33,7 +32,8 @@ class History(db.Model):
     total_profit = db.Column(db.Float, unique=False)
     total_profitper = db.Column(db.Float, unique=False)
 
-    def __init__(self, btc_quantity, btc_price,btc_current_value, btc_buying_value, btc_profit, btc_profitper, eth_quantity, eth_price, eth_current_value, eth_buying_value, eth_profit, eth_profitper, xrp_quantity, xrp_price, xrp_current_value, xrp_buying_value, xrp_profit, xrp_profitper,  total_buying_value, total_current_value, total_profit, total_profitper):
+    def __init__(self,date, btc_price=0, eth_price=0, xrp_price=0, btc_quantity=0, btc_current_value=0, btc_buying_value=0, btc_profit=0, btc_profitper=0, eth_quantity=0, eth_current_value=0, eth_buying_value=0, eth_profit=0, eth_profitper=0, xrp_quantity=0, xrp_current_value=0, xrp_buying_value=0, xrp_profit=0, xrp_profitper=0,  total_buying_value=0, total_current_value=0, total_profit=0, total_profitper=0):
+        self.date = date
 
         self.btc_quantity = btc_quantity
         self.btc_price = btc_price

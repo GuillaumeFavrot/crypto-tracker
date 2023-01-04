@@ -1,12 +1,11 @@
 import React, {useState} from 'react'
-import { flushSync } from 'react-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { getGraph } from './../state/features/walletSlice'
-import plot from './plot.png'
 
 function Graph() {
 
   const view = useSelector(state => state.view)
+  const graphId = useSelector(state => state.wallet.graphId)
 
   const dispatch = useDispatch()
 
@@ -15,25 +14,31 @@ function Graph() {
   const [report, setReport] = useState('profit')
   const [period, setPeriod] = useState('all')
 
+  //This is the IP address this component will fetch the plot on
+  let ip
+
+  if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
+    ip = '127.0.0.1:8000'
+  } else {
+    ip = process.env.REACT_APP_PROD_IP
+  }
+
+
   //User input detection functions 
   const onTokenChange = (e) => {
     setToken(e.target.value)
-    console.log(token)
   }
 
   const onReportChange = (e) => {
     setReport(e.target.value)
-    console.log(report)
   }
 
   const onPeriodChange = (e) => {
     setPeriod(e.target.value)
-    console.log(period)
   }
 
   //Graph update request function
   const updateGraph = () => {
-  
     let request = {
       token: token,
       report: report,
@@ -42,12 +47,12 @@ function Graph() {
     dispatch(getGraph(request))
     setToken('total')
     setReport('profit')
-    setPeriod('all')
+    setPeriod('all')    
   }
 
   return (
     <div className={view.page === "Evolution du portefeuille" ? "pt-5 container-fluid container-form text-white d-flex flex-column" : "d-none"}>
-      <img src={plot} alt="" className='plot'></img>
+      <img src={`http://${ip}/api/history/plot/${graphId}`} alt=""></img>
 
       <div className='d-flex flex-row mb-1 mt-3'>
 
@@ -73,9 +78,9 @@ function Graph() {
           <option value="week">Une semaine</option>
           <option value="month">Un mois</option>
           <option value="all">Depuis le début</option>
-        </select>
+        </select> 
+      <button onClick={() => updateGraph()} className="btn btn-secondary w-10 fs-4 text-black pt-1 pb-1">ok</button>
       </div>
-      <button onClick={() => updateGraph()} className="btn btn-secondary w-100 fs-4 text-black pt-1 pb-1 mt-1">Mettre à jour le graphique</button>
     </div>
   )
 }

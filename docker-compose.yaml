@@ -15,6 +15,14 @@ services:
       - "80:80"
     depends_on:
       - flask_gunicorn
+  
+  scheduler:
+    restart: always
+    build: ./scheduler
+    ports:
+      - "8080:8080"
+    depends_on:
+      - flask_gunicorn
 
 volumes:
   static:
